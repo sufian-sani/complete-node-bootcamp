@@ -12,6 +12,6 @@ router
 router.route('/tour-stats').get(tourController.getTourStats);
 
 router.route('/').get(authController.protect, tourController.getAllTours).post(tourController.createTour)
-router.route('/:id').delete(tourController.deleteTour).get(tourController.getTour).patch(tourController.updateTour)
+router.route('/:id').delete(authController.protect, authController.restrictTo('admin','lead-guide'), tourController.deleteTour).get(tourController.getTour).patch(tourController.updateTour)
 
 module.exports = router;
